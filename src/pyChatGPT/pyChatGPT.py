@@ -339,18 +339,23 @@ class ChatGPT:
         except SeleniumExceptions.TimeoutException as e:
             self.driver.save_screenshot('login_failed.png')
             raise e
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(chatgpt_age_requirements_btn)
-        )
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(chatgpt_age_next_btn)
-        )
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(chatgpt_age_next_btn)
-        )
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(chatgpt_age_done_btn)
-        )
+        for _ range(3):
+            try:
+                WebDriverWait(self.driver, 5).until(
+                    EC.element_to_be_clickable(chatgpt_age_requirements_btn)
+                )
+                WebDriverWait(self.driver, 5).until(
+                    EC.element_to_be_clickable(chatgpt_age_next_btn)
+                )
+                WebDriverWait(self.driver, 5).until(
+                    EC.element_to_be_clickable(chatgpt_age_next_btn)
+                )
+                WebDriverWait(self.driver, 5).until(
+                    EC.element_to_be_clickable(chatgpt_age_done_btn)
+                )
+                break
+            except:
+                pass
         self.logger.debug('Closing tab...')
         self.driver.close()
         self.driver.switch_to.window(original_window)
