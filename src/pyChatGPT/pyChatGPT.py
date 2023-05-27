@@ -339,7 +339,7 @@ class ChatGPT:
         except SeleniumExceptions.TimeoutException as e:
             self.driver.save_screenshot('login_failed.png')
             raise e
-        for _ range(3):
+        for _ in range(3):
             try:
                 WebDriverWait(self.driver, 5).until(
                     EC.element_to_be_clickable(chatgpt_age_requirements_btn)
