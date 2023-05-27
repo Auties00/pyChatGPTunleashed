@@ -411,7 +411,12 @@ class ChatGPT:
         textbox = WebDriverWait(self.driver, 5).until(
             EC.element_to_be_clickable(chatgpt_textbox)
         )
-        textbox.click()
+        for _ in range(3):
+            try:
+                textbox.click()
+                break
+            except:
+                time.sleep(5)
         self.driver.execute_script(
             '''
         var element = arguments[0], txt = arguments[1];
