@@ -462,7 +462,6 @@ class ChatGPT:
             ).click()
             time.sleep(0.5)
             matches = pattern.search(self.driver.current_url)
-        conversation_id = matches.group()
         return {'message': content, 'conversation_id': 'unknown'}
 
     def reset_conversation(self) -> None:
