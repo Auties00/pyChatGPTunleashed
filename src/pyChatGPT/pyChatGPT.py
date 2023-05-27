@@ -343,16 +343,16 @@ class ChatGPT:
             try:
                 WebDriverWait(self.driver, 5).until(
                     EC.element_to_be_clickable(chatgpt_age_requirements_btn)
-                )
+                ).click()
                 WebDriverWait(self.driver, 5).until(
                     EC.element_to_be_clickable(chatgpt_age_next_btn)
-                )
+                ).click()
                 WebDriverWait(self.driver, 5).until(
                     EC.element_to_be_clickable(chatgpt_age_next_btn)
-                )
+                ).click()
                 WebDriverWait(self.driver, 5).until(
                     EC.element_to_be_clickable(chatgpt_age_done_btn)
-                )
+                ).click()
                 break
             except:
                 pass
