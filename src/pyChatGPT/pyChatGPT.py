@@ -319,7 +319,7 @@ class ChatGPT:
 
         self.logger.debug('Checking if login was successful')
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 300).until(
                 EC.presence_of_element_located(chatgpt_logged_h1)
             )
             if self.__login_cookies_path:
@@ -458,7 +458,7 @@ class ChatGPT:
             time.sleep(0.5)
             matches = pattern.search(self.driver.current_url)
         conversation_id = matches.group()
-        return {'message': content, 'conversation_id': conversation_id}
+        return {'message': content, 'conversation_id': 'unknown'}
 
     def reset_conversation(self) -> None:
         '''
