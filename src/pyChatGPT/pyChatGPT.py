@@ -28,6 +28,9 @@ chatgpt_small_response = (
 chatgpt_alert = (By.XPATH, '//div[@role="alert"]')
 chatgpt_intro = (By.ID, 'headlessui-portal-root')
 chatgpt_login_btn = (By.XPATH, '//button[contains(normalize-space(.), "Log in")]')
+chatgpt_age_requirements_btn = (By.XPATH, '//button[contains(normalize-space(.), "I meet OpenAI\'s age requirements")]')
+chatgpt_age_next_btn = (By.XPATH, '//button[contains(normalize-space(.), "Next")]')
+chatgpt_age_done_btn = (By.XPATH, '//button[contains(normalize-space(.), "Done")]')
 chatgpt_login_h1 = (By.XPATH, '//h1[text()="Welcome back"]')
 chatgpt_logged_h1 = (By.XPATH, '//h1[text()="ChatGPT"]')
 
@@ -336,7 +339,18 @@ class ChatGPT:
         except SeleniumExceptions.TimeoutException as e:
             self.driver.save_screenshot('login_failed.png')
             raise e
-
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(chatgpt_age_requirements_btn)
+        )
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(chatgpt_age_next_btn)
+        )
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(chatgpt_age_next_btn)
+        )
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(chatgpt_age_done_btn)
+        )
         self.logger.debug('Closing tab...')
         self.driver.close()
         self.driver.switch_to.window(original_window)
