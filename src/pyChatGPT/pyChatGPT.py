@@ -3,8 +3,9 @@ from selenium.common import exceptions as SeleniumExceptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-import undetected_chromedriver as uc
 from markdownify import markdownify
 from threading import Thread
 import platform
@@ -177,14 +178,14 @@ class ChatGPT:
             self.display.start()
 
         self.logger.debug('Initializing browser...')
-        options = uc.ChromeOptions()
+        options = Options()
         options.add_argument('--window-size=1024,768')
         if self.__proxy:
             options.add_argument(f'--proxy-server={self.__proxy}')
         for arg in self.__chrome_args:
             options.add_argument(arg)
         try:
-            self.driver = uc.Chrome(options=options)
+            self.driver = webdriver.Chrome(options=options)
         except TypeError as e:
             if str(e) == 'expected str, bytes or os.PathLike object, not NoneType':
                 raise ValueError('Chrome installation not found')
