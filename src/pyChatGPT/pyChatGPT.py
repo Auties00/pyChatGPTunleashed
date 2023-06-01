@@ -309,11 +309,11 @@ class ChatGPT:
         self.__check_capacity('https://chat.openai.com/auth/login')
 
         self.logger.debug('Clicking login button...')
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 60).until(
             EC.element_to_be_clickable(chatgpt_login_btn)
         ).click()
 
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 60).until(
             EC.presence_of_element_located(chatgpt_login_h1)
         )
 
